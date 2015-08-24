@@ -1,0 +1,8 @@
+dependencies:
+  pre:
+    - git clone https://github.com/thinca/vim-themis
+test:
+  pre:
+    - vim --version
+  override:
+    - vim-themis/bin/themis --reporter dot
