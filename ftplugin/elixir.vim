@@ -52,5 +52,13 @@ if exists('g:vivi_enable_default_key_mappings')
   endif
 endif
 
+" auto syntax checking
+if exists('g:vivi_enable_auto_syntax_checking')
+    \ && g:vivi_enable_auto_syntax_checking
+  let g:watchdogs_check_BufWritePost_enables = {
+      \ 'elixir': 1
+      \ }
+endif
+
 let &cpo = s:save_cpo
 unlet s:save_cpo
