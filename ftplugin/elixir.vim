@@ -13,15 +13,10 @@ let g:quickrun_config['mix_test'] = {
     \ 'outputter':               'error',
     \ 'outputter/error/success': 'message',
     \ 'outputter/error/error':   'quickfix',
-    \ 'outputter/message/log':   0,
+    \ 'outputter/message/log':   1,
     \ 'errorformat':             '%E\ %#%n)\ %.%#,%C\ %#%f:%l,%Z%.%#stacktrace:,%C%m,%.%#(%.%#Error)\ %f:%l:\ %m,%-G%.%#',
     \ 'hook/cd/directory':       vivi#get_mix_root(expand('%:p:h')),
     \ }
-
-function! s:QuickRunMixLineTest() abort
-  let current_line = line('.')
-  execute ':QuickRun mix_test -exec "%c test %s:' . current_line . '"'
-endfunction
 
 " watchdog config
 let g:quickrun_config['watchdogs_checker/elixir'] = {
@@ -35,13 +30,18 @@ let g:quickrun_config['elixir/watchdogs_checker'] = {
     \ }
 call watchdogs#setup(g:quickrun_config)
 
+command! MixTest call quickrun#run('mix_test')
+command! MixTestForCurrentLine call vivi#quickrun#mix_test_for_current_line()
+
 ""
 " Call `mix test`
-nnoremap <silent> <Plug>(vivi_mix_test) :<C-u>QuickRun mix_test<CR>
+nnoremap <silent> <Plug>(vivi_mix_test)
+    \ :<C-u>MixTest<CR>
 
 ""
 " Call `mix test` for current line
-vnoremap <silent> <Plug>(vivi_mix_line_test) :call <SID>QuickRunMixLineTest()<CR>
+vnoremap <silent> <Plug>(vivi_mix_test_for_current_line)
+    \ :<C-u>MixTestForCurrentLine<CR>
 
 " default key mapping
 if exists('g:vivi_enable_default_key_mappings')
@@ -52,7 +52,7 @@ if exists('g:vivi_enable_default_key_mappings')
   " mix test
   if !hasmapto('<Plug>(vivi_mix_test)')
     silent! nmap <unique> <Leader>t <Plug>(vivi_mix_test)
-    silent! vmap <unique> <Leader>t <Plug>(vivi_mix_line_test)
+    silent! vmap <unique> <Leader>t <Plug>(vivi_mix_test_for_current_line)
   endif
 endif
 

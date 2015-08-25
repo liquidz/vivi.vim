@@ -18,6 +18,14 @@ NeoBundle 'osyo-manga/vim-watchdogs'
 NeoBundle 'liquidz/vivi.vim'
 ```
 
+## Commands
+
+| command | notes |
+| ------- | ----- |
+| MixTest | Run `mix test`. |
+| MixTestForCurrentLine | Run `mix test` for current line number. |
+
+
 ## Configuration
 
 * Enables auto syntax checking. (default: DISABLED)
@@ -35,7 +43,7 @@ let g:vivi_enable_default_key_mappings = 1
 | ------ | ----- | ---- | ----- |
 | insert | ">>"  | "\|>" | Pipeline. |
 | normal | \<Leader\>t  | \<Plug\>(vivi_mix_test) | Run `mix test`. |
-| visual | \<Leader\>t  | \<Plug\>(vivi_mix_line_test) | Run `mix test` with specific line number. |
+| visual | \<Leader\>t  | \<Plug\>(vivi_mix_test_for_current_line) | Run `mix test` for current line number. |
 
 ## License
 
