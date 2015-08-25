@@ -1,6 +1,6 @@
 # vivi.vim [![Circle CI](https://circleci.com/gh/liquidz/vivi.vim.svg?style=svg)](https://circleci.com/gh/liquidz/vivi.vim)
 
-Support to setup Elixir development environment in Vim.
+Support to setup a Elixir development environment in Vim.
 
 ## Requirements
 
@@ -20,10 +20,6 @@ NeoBundle 'liquidz/vivi.vim'
 
 ## Configuration
 
-* Change vim-quickrun's OUTPUTTER module for `mix test`. (default: quickfix)
-```
-let g:vivi_mix_test_outputter = 'quickfix'
-```
 * Enables auto syntax checking. (default: DISABLED)
 ```
 let g:vivi_enable_auto_syntax_checking = 1
@@ -38,7 +34,8 @@ let g:vivi_enable_default_key_mappings = 1
 | mode   | lhs   | rhs | notes |
 | ------ | ----- | --- | ----- |
 | insert | ">>"  | "|>" | Pipeline |
-| normal | \<Leader\>t  | \<Plug\>(mix_test) | Call `mix test` |
+| normal | \<Leader\>t  | \<Plug\>(vivi_mix_test) | Run `mix test`. |
+| visual | \<Leader\>t  | \<Plug\>(vivi_mix_line_test) | Run `mix test` with specific line number. |
 
 ## License
 
