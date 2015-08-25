@@ -31,9 +31,9 @@ let g:vivi_enable_default_key_mappings = 1
 
 ## Default key mappings
 
-| mode   | lhs   | rhs | notes |
-| ------ | ----- | --- | ----- |
-| insert | ">>"  | "|>" | Pipeline |
+| mode   | lhs   | rhs  | notes |
+| ------ | ----- | ---- | ----- |
+| insert | ">>"  | "\|>" | Pipeline. |
 | normal | \<Leader\>t  | \<Plug\>(vivi_mix_test) | Run `mix test`. |
 | visual | \<Leader\>t  | \<Plug\>(vivi_mix_line_test) | Run `mix test` with specific line number. |
 
