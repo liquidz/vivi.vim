@@ -22,6 +22,7 @@ NeoBundle 'liquidz/vivi.vim'
 
 | command | notes |
 | ------- | ----- |
+| MixRun  | Run `mix run $CURRENT_FILE`. |
 | MixTest | Run `mix test`. |
 | MixTestForCurrentLine | Run `mix test` for current line number. |
 

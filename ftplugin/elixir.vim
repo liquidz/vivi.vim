@@ -6,6 +6,12 @@ let g:loaded_vivi = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
+let g:quickrun_config['mix_run'] = {
+    \ 'command':           'mix',
+    \ 'exec':              '%c run %s',
+    \ 'hook/cd/directory': vivi#get_mix_root(expand('%:p:h')),
+    \ }
+
 " mix test config
 let g:quickrun_config['mix_test'] = {
     \ 'command':                 'mix',
@@ -30,8 +36,14 @@ let g:quickrun_config['elixir/watchdogs_checker'] = {
     \ }
 call watchdogs#setup(g:quickrun_config)
 
+command! MixRun call quickrun#run('mix_run')
 command! MixTest call quickrun#run('mix_test')
 command! MixTestForCurrentLine call vivi#quickrun#mix_test_for_current_line()
+
+""
+" Call `mix run`
+nnoremap <silent> <Plug>(vivi_mix_run)
+    \ :<C-u>MixRun<CR>
 
 ""
 " Call `mix test`
