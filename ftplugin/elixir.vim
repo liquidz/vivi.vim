@@ -6,23 +6,22 @@ let g:loaded_vivi = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
-""
-" @var
-" QuickRun Outputter for `mix test`.
-" Default value is 'quickfix'.
-"
-if !exists('g:vivi_mix_test_outputter')
-  let g:vivi_mix_test_outputter = 'quickfix'
-endif
-
 " mix test config
 let g:quickrun_config['mix_test'] = {
-    \ 'command':           'mix',
-    \ 'exec':              '%c test',
-    \ 'outputter':         'quickfix',
-    \ 'errorformat':       '%E\ %#%n)\ %.%#,%C\ %#%f:%l,%Z%.%#stacktrace:,%C%m,%.%#(%.%#Error)\ %f:%l:\ %m,%-G%.%#',
-    \ 'hook/cd/directory': vivi#get_mix_root(expand('%:p:h'))
+    \ 'command':                 'mix',
+    \ 'exec':                    '%c test',
+    \ 'outputter':               'error',
+    \ 'outputter/error/success': 'message',
+    \ 'outputter/error/error':   'quickfix',
+    \ 'outputter/message/log':   0,
+    \ 'errorformat':             '%E\ %#%n)\ %.%#,%C\ %#%f:%l,%Z%.%#stacktrace:,%C%m,%.%#(%.%#Error)\ %f:%l:\ %m,%-G%.%#',
+    \ 'hook/cd/directory':       vivi#get_mix_root(expand('%:p:h')),
     \ }
+
+function! s:QuickRunMixLineTest() abort
+  let current_line = line('.')
+  execute ':QuickRun mix_test -exec "%c test %s:' . current_line . '"'
+endfunction
 
 " watchdog config
 let g:quickrun_config['watchdogs_checker/elixir'] = {
@@ -38,7 +37,11 @@ call watchdogs#setup(g:quickrun_config)
 
 ""
 " Call `mix test`
-nnoremap <silent> <Plug>(mix_test) :<C-u>QuickRun mix_test<CR>
+nnoremap <silent> <Plug>(vivi_mix_test) :<C-u>QuickRun mix_test<CR>
+
+""
+" Call `mix test` for current line
+vnoremap <silent> <Plug>(vivi_mix_line_test) :call <SID>QuickRunMixLineTest()<CR>
 
 " default key mapping
 if exists('g:vivi_enable_default_key_mappings')
@@ -47,8 +50,9 @@ if exists('g:vivi_enable_default_key_mappings')
   imap >> \|><Space>
 
   " mix test
-  if !hasmapto('<Plug>(mix_test)')
-    silent! nmap <unique> <Leader>t <Plug>(mix_test)
+  if !hasmapto('<Plug>(vivi_mix_test)')
+    silent! nmap <unique> <Leader>t <Plug>(vivi_mix_test)
+    silent! vmap <unique> <Leader>t <Plug>(vivi_mix_line_test)
   endif
 endif
 
