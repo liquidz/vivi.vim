@@ -25,6 +25,8 @@ NeoBundle 'liquidz/vivi.vim'
 | command | notes |
 | ------- | ----- |
 | MixRun  | Run `mix run $CURRENT_FILE` in mix project, or run `elixir $CURRENT_FILE`. |
+| MixDepsGet | Run `mix deps.get`. |
+| MixDepsUpdateAll | Run `mix deps.update --all`. |
 | MixTest | Run `mix test`. |
 | MixTestForCurrentLine | Run `mix test` for current line number. |
 
@@ -33,6 +35,8 @@ NeoBundle 'liquidz/vivi.vim'
 | mode | mapping | notes |
 | ---- | ------- | ----- |
 | normal | \<Plug\>(vivi_mix_run) | call `MixRun` command. |
+| normal | \<Plug\>(vivi_mix_deps_get) | call `MixDepsGet` command. |
+| normal | \<Plug\>(vivi_mix_deps_update_all) | call `MixDepsUpdateAll` command. |
 | normal | \<Plug\>(vivi_mix_test) | call `MixTest` command. |
 | visual | \<Plug\>(vivi_mix_test_for_current_line) | call `MixTestForCurrentLine` command. |
 
