@@ -1,3 +1,12 @@
+function! vivi#quickrun#mix_run() abort
+  let root = vivi#get_mix_root(expand('%:p:h'))
+  if root ==# ''
+    call quickrun#run('elixir')
+  else
+    call quickrun#run('mix_run')
+  endif
+endfunction
+
 function! vivi#quickrun#mix_test_for_current_line() abort
   let current_line = line('.')
   call quickrun#run({

@@ -36,19 +36,23 @@ let g:quickrun_config['elixir/watchdogs_checker'] = {
     \ }
 call watchdogs#setup(g:quickrun_config)
 
-command! MixRun call quickrun#run('mix_run')
+command! MixRun call vivi#quickrun#mix_run()
+command! MixDepsGet call quickrun#run({
+    \ 'type': 'mix_run', 'exec': '%c deps.get'})
+command! MixDepsUpdateAll call quickrun#run({
+    \ 'type': 'mix_run', 'exec': '%c deps.update --all'})
 command! MixTest call quickrun#run('mix_test')
 command! MixTestForCurrentLine call vivi#quickrun#mix_test_for_current_line()
 
 ""
 " Call `mix run`
-nnoremap <silent> <Plug>(vivi_mix_run)
-    \ :<C-u>MixRun<CR>
+nnoremap <silent> <Plug>(vivi_mix_run) :<C-u>MixRun<CR>
+nnoremap <silent> <Plug>(vivi_mix_deps_get) :<C-u>MixDepsGet<CR>
+nnoremap <silent> <Plug>(vivi_mix_deps_update_all) :<C-u>MixDepsUpdateAll<CR>
 
 ""
 " Call `mix test`
-nnoremap <silent> <Plug>(vivi_mix_test)
-    \ :<C-u>MixTest<CR>
+nnoremap <silent> <Plug>(vivi_mix_test) :<C-u>MixTest<CR>
 
 ""
 " Call `mix test` for current line
@@ -61,10 +65,16 @@ if exists('g:vivi_enable_default_key_mappings')
   " pipeline
   imap >> \|><Space>
 
-  " mix test
+  if !hasmapto('<Plug>(vivi_mix_run)')
+    silent! nmap <Leader>r <Plug>(vivi_mix_run)
+  endif
+
   if !hasmapto('<Plug>(vivi_mix_test)')
-    silent! nmap <unique> <Leader>t <Plug>(vivi_mix_test)
-    silent! vmap <unique> <Leader>t <Plug>(vivi_mix_test_for_current_line)
+    silent! nmap <Leader>t <Plug>(vivi_mix_test)
+  endif
+
+  if !hasmapto('<Plug>(vivi_mix_test_for_current_line)')
+    silent! vmap <Leader>t <Plug>(vivi_mix_test_for_current_line)
   endif
 endif
 
