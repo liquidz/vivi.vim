@@ -1,9 +1,13 @@
 function! vivi#quickrun#mix_run() abort
-  let root = vivi#get_mix_root(expand('%:p:h'))
-  if root ==# ''
-    call quickrun#run('elixir')
+  if &filetype ==# 'elixir'
+    let root = vivi#get_mix_root(expand('%:p:h'))
+    if root ==# ''
+      call quickrun#run('elixir')
+    else
+      call quickrun#run('mix_run')
+    endif
   else
-    call quickrun#run('mix_run')
+    call quickrun#run()
   endif
 endfunction
 

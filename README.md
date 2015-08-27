@@ -6,6 +6,7 @@ Support to setup a Elixir development environment in Vim.
 
 * [vim-elixir](https://github.com/elixir-lang/vim-elixir) -> Syntax highlighting
 * [vim-quickrun](https://github.com/thinca/vim-quickrun) -> Running `mix` commands.
+* [shabadou.vim](https://github.com/osyo-manga/shabadou.vim) -> Required by vim-watchdogs
 * [vim-watchdogs](https://github.com/osyo-manga/vim-watchdogs) -> Syntax checking
 
 ## Installation
@@ -14,6 +15,7 @@ Support to setup a Elixir development environment in Vim.
 ```
 NeoBundle 'elixir-lang/vim-elixir'
 NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'osyo-manga/shabadou.vim'
 NeoBundle 'osyo-manga/vim-watchdogs'
 NeoBundle 'liquidz/vivi.vim'
 ```
@@ -49,6 +51,11 @@ let g:vivi_enable_auto_syntax_checking = 1
 * Enables default key mappings. (default: **DISABLED**)
 ```
 let g:vivi_enable_default_key_mappings = 1
+```
+* Change quickrun configration for `mix run` and `mix test`.
+```
+let g:vivi_mix_run_config = { ... }
+let g:vivi_mix_test_config = { ... }
 ```
 
 ## Default Key Mappings

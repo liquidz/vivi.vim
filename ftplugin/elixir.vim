@@ -6,23 +6,30 @@ let g:loaded_vivi = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
-let g:quickrun_config['mix_run'] = {
+if !exists('g:vivi_mix_run_config')
+  let g:vivi_mix_run_config = {}
+endif
+
+if !exists('g:vivi_mix_test_config')
+  let g:vivi_mix_test_config = {}
+endif
+
+let s:mix_run_default_config = {
     \ 'command':           'mix',
     \ 'exec':              '%c run %s',
     \ 'hook/cd/directory': vivi#get_mix_root(expand('%:p:h')),
     \ }
 
-" mix test config
-let g:quickrun_config['mix_test'] = {
-    \ 'command':                 'mix',
-    \ 'exec':                    '%c test',
-    \ 'outputter':               'error',
-    \ 'outputter/error/success': 'message',
-    \ 'outputter/error/error':   'quickfix',
-    \ 'outputter/message/log':   1,
-    \ 'errorformat':             '%E\ %#%n)\ %.%#,%C\ %#%f:%l,%Z%.%#stacktrace:,%C%m,%.%#(%.%#Error)\ %f:%l:\ %m,%-G%.%#',
-    \ 'hook/cd/directory':       vivi#get_mix_root(expand('%:p:h')),
+let s:mix_test_default_config = {
+    \ 'command':           'mix',
+    \ 'exec':              '%c test --no-color',
+    \ 'outputter':         'multi:buffer:quickfix',
+    \ 'errorformat':       '%E\ %#%n)\ %.%#,%C\ %#%f:%l,%Z%.%#stacktrace:,%C%m,%.%#(%.%#Error)\ %f:%l:\ %m,%-G%.%#',
+    \ 'hook/cd/directory': vivi#get_mix_root(expand('%:p:h')),
     \ }
+
+let g:quickrun_config['mix_run'] = extend(s:mix_run_default_config, g:vivi_mix_run_config)
+let g:quickrun_config['mix_test'] = extend(s:mix_test_default_config, g:vivi_mix_test_config)
 
 " watchdog config
 let g:quickrun_config['watchdogs_checker/elixir'] = {
