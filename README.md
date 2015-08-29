@@ -6,6 +6,7 @@ Support to setup a Elixir development environment in Vim.
 
 * [vim-elixir](https://github.com/elixir-lang/vim-elixir) -> Syntax highlighting
 * [vim-quickrun](https://github.com/thinca/vim-quickrun) -> Running `mix` commands.
+* [shabadou.vim](https://github.com/osyo-manga/shabadou.vim) -> Required by vim-watchdogs
 * [vim-watchdogs](https://github.com/osyo-manga/vim-watchdogs) -> Syntax checking
 
 ## Installation
@@ -14,6 +15,7 @@ Support to setup a Elixir development environment in Vim.
 ```
 NeoBundle 'elixir-lang/vim-elixir'
 NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'osyo-manga/shabadou.vim'
 NeoBundle 'osyo-manga/vim-watchdogs'
 NeoBundle 'liquidz/vivi.vim'
 ```
@@ -29,6 +31,7 @@ NeoBundle 'liquidz/vivi.vim'
 | MixDepsUpdateAll | Run `mix deps.update --all`. |
 | MixTest | Run `mix test`. |
 | MixTestForCurrentLine | Run `mix test` for current line number. |
+| MixTestAgain | Run `mix test` as same as last testing condition. |
 
 ### Key Mappings
 
@@ -39,6 +42,7 @@ NeoBundle 'liquidz/vivi.vim'
 | normal | \<Plug\>(vivi_mix_deps_update_all) | call `MixDepsUpdateAll` command. |
 | normal | \<Plug\>(vivi_mix_test) | call `MixTest` command. |
 | visual | \<Plug\>(vivi_mix_test_for_current_line) | call `MixTestForCurrentLine` command. |
+| normal | \<Plug\>(vivi_mix_test_again) | call `MixTestAgain` command. |
 
 ## Configuration
 
@@ -50,6 +54,11 @@ let g:vivi_enable_auto_syntax_checking = 1
 ```
 let g:vivi_enable_default_key_mappings = 1
 ```
+* Change quickrun configration for `mix run` and `mix test`.
+```
+let g:vivi_mix_run_config = { ... }
+let g:vivi_mix_test_config = { ... }
+```
 
 ## Default Key Mappings
 
@@ -57,7 +66,7 @@ let g:vivi_enable_default_key_mappings = 1
 | ------ | ----- | ---- | ----- |
 | insert | ">>"  | "\|>" | Pipeline. |
 | normal | \<Leader\>r  | \<Plug\>(vivi_mix_run) | |
-| normal | \<Leader\>t  | \<Plug\>(vivi_mix_test) | |
+| normal | \<Leader\>t  | \<Plug\>(vivi_mix_test_again) | |
 | visual | \<Leader\>t  | \<Plug\>(vivi_mix_test_for_current_line) | |
 
 ## License
