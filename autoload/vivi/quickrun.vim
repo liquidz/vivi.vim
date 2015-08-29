@@ -1,8 +1,4 @@
 function! vivi#quickrun#mix_run() abort
-  if exists('g:vivi#quickrun#tested_line')
-    unlet g:vivi#quickrun#tested_line
-  endif
-
   if &filetype ==# 'elixir'
     let root = vivi#get_mix_root(expand('%:p:h'))
     if root ==# ''
@@ -16,6 +12,10 @@ function! vivi#quickrun#mix_run() abort
 endfunction
 
 function! vivi#quickrun#mix_test() abort
+  if exists('g:vivi#quickrun#tested_line')
+    unlet g:vivi#quickrun#tested_line
+  endif
+
   call quickrun#run('mix_test')
 endfunction
 
