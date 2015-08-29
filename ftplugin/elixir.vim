@@ -48,8 +48,9 @@ command! MixDepsGet call quickrun#run({
     \ 'type': 'mix_run', 'exec': '%c deps.get'})
 command! MixDepsUpdateAll call quickrun#run({
     \ 'type': 'mix_run', 'exec': '%c deps.update --all'})
-command! MixTest call quickrun#run('mix_test')
+command! MixTest call vivi#quickrun#mix_test()
 command! MixTestForCurrentLine call vivi#quickrun#mix_test_for_current_line()
+command! MixTestAgain call vivi#quickrun#mix_test_for_last_tested_line()
 
 ""
 " Call `mix run`
@@ -66,6 +67,8 @@ nnoremap <silent> <Plug>(vivi_mix_test) :<C-u>MixTest<CR>
 vnoremap <silent> <Plug>(vivi_mix_test_for_current_line)
     \ :<C-u>MixTestForCurrentLine<CR>
 
+nnoremap <silent> <Plug>(vivi_mix_test_again) :<C-u>MixTestAgain<CR>
+
 " default key mapping
 if exists('g:vivi_enable_default_key_mappings')
     \ && g:vivi_enable_default_key_mappings
@@ -76,8 +79,8 @@ if exists('g:vivi_enable_default_key_mappings')
     silent! nmap <Leader>r <Plug>(vivi_mix_run)
   endif
 
-  if !hasmapto('<Plug>(vivi_mix_test)')
-    silent! nmap <Leader>t <Plug>(vivi_mix_test)
+  if !hasmapto('<Plug>(vivi_mix_test_again)')
+    silent! nmap <Leader>t <Plug>(vivi_mix_test_again)
   endif
 
   if !hasmapto('<Plug>(vivi_mix_test_for_current_line)')

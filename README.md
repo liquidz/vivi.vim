@@ -31,6 +31,7 @@ NeoBundle 'liquidz/vivi.vim'
 | MixDepsUpdateAll | Run `mix deps.update --all`. |
 | MixTest | Run `mix test`. |
 | MixTestForCurrentLine | Run `mix test` for current line number. |
+| MixTestAgain | Run `mix test` as same as last testing condition. |
 
 ### Key Mappings
 
@@ -41,6 +42,7 @@ NeoBundle 'liquidz/vivi.vim'
 | normal | \<Plug\>(vivi_mix_deps_update_all) | call `MixDepsUpdateAll` command. |
 | normal | \<Plug\>(vivi_mix_test) | call `MixTest` command. |
 | visual | \<Plug\>(vivi_mix_test_for_current_line) | call `MixTestForCurrentLine` command. |
+| normal | \<Plug\>(vivi_mix_test_again) | call `MixTestAgain` command. |
 
 ## Configuration
 
@@ -64,7 +66,7 @@ let g:vivi_mix_test_config = { ... }
 | ------ | ----- | ---- | ----- |
 | insert | ">>"  | "\|>" | Pipeline. |
 | normal | \<Leader\>r  | \<Plug\>(vivi_mix_run) | |
-| normal | \<Leader\>t  | \<Plug\>(vivi_mix_test) | |
+| normal | \<Leader\>t  | \<Plug\>(vivi_mix_test_again) | |
 | visual | \<Leader\>t  | \<Plug\>(vivi_mix_test_for_current_line) | |
 
 ## License
