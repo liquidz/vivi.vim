@@ -6,10 +6,16 @@ let g:loaded_vivi = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
+""
+" Change quickrun configration for `mix run`.
+"
 if !exists('g:vivi_mix_run_config')
   let g:vivi_mix_run_config = {}
 endif
 
+""
+" Change quickrun configration for `mix test`.
+"
 if !exists('g:vivi_mix_test_config')
   let g:vivi_mix_test_config = {}
 endif
@@ -43,33 +49,72 @@ let g:quickrun_config['elixir/watchdogs_checker'] = {
     \ }
 call watchdogs#setup(g:quickrun_config)
 
+""
+" Run `mix run`.
+"
 command! MixRun call vivi#quickrun#mix_run()
+
+""
+" Run `mix deps.get`.
+"
 command! MixDepsGet call quickrun#run({
     \ 'type': 'mix_run', 'exec': '%c deps.get'})
+
+""
+" Run `mix deps.update --all`.
+"
 command! MixDepsUpdateAll call quickrun#run({
     \ 'type': 'mix_run', 'exec': '%c deps.update --all'})
+
+""
+" Run `mix test`.
+"
 command! MixTest call vivi#quickrun#mix_test()
+
+""
+" Run `mix test` for current line.
+"
 command! MixTestForCurrentLine call vivi#quickrun#mix_test_for_current_line()
+
+""
+" Run `mix test` as same as last testing condition.
+"
 command! MixTestAgain call vivi#quickrun#mix_test_for_last_tested_line()
 
 ""
-" Call `mix run`
+" Call `:MixRun` command.
+"
 nnoremap <silent> <Plug>(vivi_mix_run) :<C-u>MixRun<CR>
+
+""
+" Call `:MixDepsGet` command.
+"
 nnoremap <silent> <Plug>(vivi_mix_deps_get) :<C-u>MixDepsGet<CR>
+
+""
+" Call `:MixDepsUpdateAll` command.
+"
 nnoremap <silent> <Plug>(vivi_mix_deps_update_all) :<C-u>MixDepsUpdateAll<CR>
 
 ""
-" Call `mix test`
+" Call `:MixTest` command.
+"
 nnoremap <silent> <Plug>(vivi_mix_test) :<C-u>MixTest<CR>
 
 ""
-" Call `mix test` for current line
+" Call `:MixTestForCurrentLine` command.
+"
 vnoremap <silent> <Plug>(vivi_mix_test_for_current_line)
     \ :<C-u>MixTestForCurrentLine<CR>
 
+""
+" Call `:MixTestAgain` command.
+"
 nnoremap <silent> <Plug>(vivi_mix_test_again) :<C-u>MixTestAgain<CR>
 
-" default key mapping
+""
+" Enables default key mappings. (default: DISABLED)
+"
 if exists('g:vivi_enable_default_key_mappings')
     \ && g:vivi_enable_default_key_mappings
   " pipeline
@@ -88,7 +133,9 @@ if exists('g:vivi_enable_default_key_mappings')
   endif
 endif
 
-" auto syntax checking
+""
+" Enables auto syntax checking. (default: DISABLED)
+"
 if exists('g:vivi_enable_auto_syntax_checking')
     \ && g:vivi_enable_auto_syntax_checking
   let g:watchdogs_check_BufWritePost_enables = {
