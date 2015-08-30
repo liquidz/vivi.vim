@@ -1,3 +1,21 @@
+""
+" *vivi.vim* supports to setup Elixir development environment.
+"
+" Requirement:
+"  - Vim 7.0 or later
+"  - vim-elixir
+"    https://github.com/elixir-lang/vim-elixir
+"  - vim-quickrun
+"    https://github.com/thinca/vim-quickrun
+"  - shabadou.vim
+"    https://github.com/osyo-manga/shabadou.vim
+"  - vim-watchdogs
+"    https://github.com/osyo-manga/vim-watchdogs
+"
+" Lateste Version:
+"  - https://github.com/liquidz/vivi.vim
+"
+
 let s:save_cpo = &cpo
 set cpo&vim
 
@@ -5,7 +23,6 @@ let s:V = vital#of('vivi')
 let s:FP = s:V.import('System.Filepath')
 
 ""
-" @var
 " File name to detect mix project root.
 " Default value is 'mix.exs'.
 "
