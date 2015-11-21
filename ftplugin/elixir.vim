@@ -121,15 +121,15 @@ if exists('g:vivi_enable_default_key_mappings')
   imap >> \|><Space>
 
   if !hasmapto('<Plug>(vivi_mix_run)')
-    silent! nmap <Leader>r <Plug>(vivi_mix_run)
+    silent! nmap <buffer> <Leader>r <Plug>(vivi_mix_run)
   endif
 
   if !hasmapto('<Plug>(vivi_mix_test_again)')
-    silent! nmap <Leader>t <Plug>(vivi_mix_test_again)
+    silent! nmap <buffer> <Leader>t <Plug>(vivi_mix_test_again)
   endif
 
   if !hasmapto('<Plug>(vivi_mix_test_for_current_line)')
-    silent! vmap <Leader>t <Plug>(vivi_mix_test_for_current_line)
+    silent! vmap <buffer> <Leader>t <Plug>(vivi_mix_test_for_current_line)
   endif
 endif
 

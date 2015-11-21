@@ -1,6 +1,6 @@
 *vivi.vim.txt*	Support to setup Elixir development environment in Vim.
 
-Version: 0.0.5
+Version: 0.0.6
 Author : uochan
 License: MIT LICENSE
 
