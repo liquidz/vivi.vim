@@ -1,25 +1,26 @@
 PLUGIN_NAME = vivi
 VITAL_MODULES = System.Filepath \
-								Data.List \
-								ConcurrentProcess
+				Data.List \
+				ConcurrentProcess
 
-.PHONY: all
-all:
+THEMIS = themis
+VIMDOC = vimdoc
+VINT = beco vint
+
+.PHONY: all test doc lint clean
+all: $(vitalize) $(doc) $(test) $(lint)
+
+vitalize:
 	vim -c "Vitalize . --name=$(PLUGIN_NAME) $(VITAL_MODULES)" -c q
 
-.PHONY: test
 test:
-	themis
+	$(THEMIS)
 
-.PHONY: doc
 doc:
-	vimdoc .
+	$(VIMDOC) .
 
-.PHONY: lint
 lint:
-	find . -name "*.vim" | grep -v vital | xargs beco vint
+	find . -name "*.vim" | grep -v vital | xargs $(VINT)
 
-.PHONY: clean
 clean:
 	/bin/rm -rf autoload/vital*
-

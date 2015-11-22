@@ -31,12 +31,12 @@ function! vivi#iex#queue(label, line) abort
   return [1, out]
 endfunction
 
-function! vivi#iex#killall()
+function! vivi#iex#killall() abort
   for label in s:processes
     call s:CP.shutdown(label)
   endfor
   let s:processes = []
-  echomsg "done"
+  echomsg 'Managed iex processes are killed.'
 endfunction
 
 function! vivi#iex#warmup() abort

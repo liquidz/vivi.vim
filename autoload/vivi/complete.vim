@@ -6,7 +6,7 @@ let s:fns_format = ':functions |> %s.__info__ |> Enum.each(fn {a, b} -> IO.puts 
 
 function! vivi#complete#findstart(line, col) abort
     let start = a:col
-    while start > 0 && a:line[start - 1] =~ '\v[A-Za-z0-9.]'
+    while start > 0 && a:line[start - 1] =~# '\v[A-Za-z0-9.]'
       let start -= 1
     endwhile
 

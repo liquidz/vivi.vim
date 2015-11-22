@@ -4,12 +4,12 @@ set cpo&vim
 let s:source = {'name': 'vivi'}
 let s:invalid_chars = '\v[()''" \t]'
 
-function! s:source.available()
+function! s:source.available() abort
   let CP = vital#of('vivi').import('ConcurrentProcess')
 	return CP.is_available()
 endfunction
 
-function! s:source.get_body(query)
+function! s:source.get_body(query) abort
   let query = substitute(a:query, s:invalid_chars, '', 'g')
   let label = vivi#iex#of(expand('%:p:h'))
 
@@ -21,7 +21,7 @@ function! s:source.get_body(query)
   return out
 endfunction
 
-function! s:source.get_keyword()
+function! s:source.get_keyword() abort
   let isk = &l:iskeyword
   setlocal iskeyword+=.
   let keyword = expand('<cword>')
@@ -29,7 +29,7 @@ function! s:source.get_keyword()
   return keyword
 endfunction
 
-function! ref#vivi#define()
+function! ref#vivi#define() abort
   return copy(s:source)
 endfunction
 
