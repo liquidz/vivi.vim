@@ -1,5 +1,7 @@
 PLUGIN_NAME = vivi
-VITAL_MODULES = System.Filepath
+VITAL_MODULES = System.Filepath \
+								Data.List \
+								ConcurrentProcess
 
 .PHONY: all
 all:

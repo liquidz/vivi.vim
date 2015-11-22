@@ -7,6 +7,8 @@
 "    https://github.com/elixir-lang/vim-elixir
 "  - vim-quickrun
 "    https://github.com/thinca/vim-quickrun
+"  - vim-ref
+"    https://github.com/thinca/vim-ref
 "  - shabadou.vim
 "    https://github.com/osyo-manga/shabadou.vim
 "  - vim-watchdogs
@@ -19,7 +21,7 @@
 let s:save_cpo = &cpo
 set cpo&vim
 
-let s:V = vital#of('vivi')
+let s:V  = vital#of('vivi')
 let s:FP = s:V.import('System.Filepath')
 
 ""
