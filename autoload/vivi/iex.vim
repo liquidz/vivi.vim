@@ -39,8 +39,8 @@ function! vivi#iex#killall()
   echomsg "done"
 endfunction
 
-function! vivi#iex#warmup(dir) abort
-  let label = vivi#iex#of(a:dir)
+function! vivi#iex#warmup() abort
+  let label = vivi#iex#of(expand('%:p:h'))
 endfunction
 
 let &cpo = s:save_cpo
