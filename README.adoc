@@ -1,0 +1,92 @@
+= vivi.vim
+
+image:https://circleci.com/gh/liquidz/vivi.vim.svg?style=svg["Circle CI", link="https://circleci.com/gh/liquidz/vivi.vim"]
+
+Support to setup a Elixir development environment in Vim.
+
+== Requirements
+
+Vim 7.3.885 or later with link:http://vimdoc.sourceforge.net/htmldoc/if_lua.html[Lua] enabled
+
+== Installation
+
+.neobundle
+[subs="verbatim,macros"]
+----
+NeoBundle 'liquidz/vivi.vim', {
+    \ 'depends': [
+    \   'link:https://github.com/elixir-lang/vim-elixir[elixir-lang/vim-elixir]',
+    \   'link:https://github.com/Shougo/vimproc.vim[Shougo/vimproc.vim]',
+    \   'link:https://github.com/Shougo/neocomplete.vim[Shougo/neocomplete.vim]',
+    \   'link:https://github.com/thinca/vim-quickrun[thinca/vim-quickrun]',
+    \   'link:https://github.com/thinca/vim-ref[thinca/vim-ref]',
+    \   'link:https://github.com/osyo-manga/shabadou.vim[osyo-manga/shabadou.vim]',
+    \   'link:https://github.com/osyo-manga/vim-watchdogs[osyo-manga/vim-watchdogs]'
+    \ ]}
+----
+
+== Interface
+
+=== Commands
+
+[options="header,autowidth"]
+|===
+| command                | notes
+| MixRun                a| Run `mix run $CURRENT_FILE` in mix project, or run `elixir $CURRENT_FILE`.
+| MixDepsGet            a| Run `mix deps.get`.
+| MixDepsUpdateAll      a| Run `mix deps.update --all`.
+| MixTest               a| Run `mix test`.
+| MixTestForCurrentLine a| Run `mix test` for current line number.
+| MixTestAgain          a| Run `mix test` as same as last testing condition.
+|===
+
+=== Key Mappings
+
+[options="header,autowidth"]
+|===
+| mode   | mapping                                 | notes
+| normal | <Plug>(vivi_mix_run)                   a| call `MixRun` command.
+| normal | <Plug>(vivi_mix_deps_get)              a| call `MixDepsGet` command.
+| normal | <Plug>(vivi_mix_deps_update_all)       a| call `MixDepsUpdateAll` command.
+| normal | <Plug>(vivi_mix_test)                  a| call `MixTest` command.
+| visual | <Plug>(vivi_mix_test_for_current_line) a| call `MixTestForCurrentLine` command.
+| normal | <Plug>(vivi_mix_test_again)            a| call `MixTestAgain` command.
+|===
+
+== Configuration
+
+.Enables auto syntax checking. (default: **DISABLED**)
+[source,vim]
+----
+let g:vivi_enable_auto_syntax_checking = 1
+----
+
+.Enables default key mappings. (default: **DISABLED**)
+[source,vim]
+----
+let g:vivi_enable_default_key_mappings = 1
+----
+
+.Change quickrun configration for `mix run` and `mix test`.
+[source,vim]
+----
+let g:vivi_mix_run_config = { ... }
+let g:vivi_mix_test_config = { ... }
+----
+
+== Default Key Mappings
+
+[options="header,autowidth"]
+|===
+| mode   | lhs        | rhs                                    | notes
+| insert | >>         | \|>                                    | Pipeline.
+| normal | <Leader>r  | <Plug>(vivi_mix_run)                   |
+| normal | <Leader>t  | <Plug>(vivi_mix_test_again)            |
+| visual | <Leader>t  | <Plug>(vivi_mix_test_for_current_line) |
+|===
+
+== License
+
+Copyright (C) 2015 link:http://twitter.com/uochan[Masashi Iizuka]
+
+Distributed under the MIT License.
