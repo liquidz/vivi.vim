@@ -56,6 +56,11 @@ command! ViviMixTestForCurrentLine call vivi#quickrun#mix_test_for_current_line(
 "
 command! ViviMixTestAgain call vivi#quickrun#mix_test_for_last_tested_line()
 
+""
+" Kill all IEx processes
+"
+command! ViviKillAllIEx call vivi#iex#killall()
+
 """" }}}
 
 """" Key Mappings {{{
@@ -91,6 +96,10 @@ vnoremap <silent> <Plug>(vivi_mix_test_for_current_line)
 "
 nnoremap <silent> <Plug>(vivi_mix_test_again) :<C-u>ViviMixTestAgain<CR>
 
+""
+" Call `:ViviKillAllIEx` command.
+"
+nnoremap <silent> <Plug>(vivi_kill_all_iex) :<C-u>ViviKillAllIEx<CR>
 
 function! s:default_key_mappings() abort
   " pipeline
@@ -106,6 +115,10 @@ function! s:default_key_mappings() abort
 
   if !hasmapto('<Plug>(vivi_mix_test_for_current_line)')
     silent! vmap <buffer> <Leader>t <Plug>(vivi_mix_test_for_current_line)
+  endif
+
+  if !hasmapto('<Plug>(vivi_kill_all_iex)')
+    silent! nmap <buffer> <Leader>vk <Plug>(vivi_kill_all_iex)
   endif
 endfunction
 """" }}}
