@@ -2,7 +2,11 @@ let s:V  = vital#of('vivi')
 let s:DL = s:V.import('Data.List')
 let s:CP = s:V.import('ConcurrentProcess')
 
-let s:fns_format = ':functions |> %s.__info__ |> Enum.each(fn {a, b} -> IO.puts "%s.#{a} #{b}" end)'
+let s:fns_format = '
+    \ :functions
+    \ |> %s.__info__
+    \ |> Enum.each(fn {a, b} -> IO.puts "%s.#{a} #{b}" end)
+    \ '
 
 function! vivi#complete#findstart(line, col) abort
     let start = a:col
@@ -50,6 +54,9 @@ function! vivi#complete#candidate(fn) abort
       \}
 endfunction
 
+""
+" Omnifunc for Elixir.
+"
 function! vivi#complete#omni(findstart, base) abort
   if a:findstart
     let line  = getline('.')

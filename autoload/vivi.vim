@@ -5,6 +5,8 @@
 "  - Vim 7.0 or later
 "  - vim-elixir
 "    https://github.com/elixir-lang/vim-elixir
+"  - vimproc.vim
+"    https://github.com/Shougo/vimproc.vim
 "  - vim-quickrun
 "    https://github.com/thinca/vim-quickrun
 "  - vim-ref

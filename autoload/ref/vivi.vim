@@ -23,6 +23,7 @@ endfunction
 
 function! s:source.get_keyword() abort
   let isk = &l:iskeyword
+  " allow 'dot' as keyword
   setlocal iskeyword+=.
   let keyword = expand('<cword>')
   let &l:iskeyword = isk
@@ -33,6 +34,7 @@ function! s:source.opened(query) abort
   call s:syntax()
 endfunction
 
+" Syntax definition for vim-ref
 function! s:syntax() abort
   syn clear
   syn match  exDocFunction '\v^\*\s+.+'

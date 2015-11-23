@@ -1,6 +1,6 @@
 *vivi.vim.txt*	Support to setup Elixir development environment in Vim.
 
-Version: 0.0.6
+Version: 0.1.0
 Author : uochan
 License: MIT LICENSE
 
@@ -27,8 +27,12 @@ Requirement:
  - Vim 7.0 or later
  - vim-elixir
    https://github.com/elixir-lang/vim-elixir
+ - vimproc.vim
+   https://github.com/Shougo/vimproc.vim
  - vim-quickrun
    https://github.com/thinca/vim-quickrun
+ - vim-ref
+   https://github.com/thinca/vim-ref
  - shabadou.vim
    https://github.com/osyo-manga/shabadou.vim
  - vim-watchdogs
@@ -70,6 +74,18 @@ Commands                                                   *vivi.vim-commands*
 
 ------------------------------------------------------------------------------
 Functions                                                 *vivi.vim-functions*
+
+                                                          *vivi#complete#omni*
+vivi#complete#omni(findstart, base)
+	Omnifunc for Elixir.
+
+                                                            *vivi#iex#killall*
+vivi#iex#killall()
+	Kill all iex concurrent processes.
+
+                                                             *vivi#iex#warmup*
+vivi#iex#warmup()
+	Warm up iex concurrent process in current directory.
 
                                                        *vivi#quickrun#mix_run*
 vivi#quickrun#mix_run()
