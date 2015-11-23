@@ -32,9 +32,15 @@ endfunction
 
 function! s:source.opened(query) abort
   call s:syntax()
+  call s:mapping()
 endfunction
 
-" Syntax definition for vim-ref
+" Key mappings for vim-ref buffer
+function! s:mapping() abort
+  nnoremap <buffer> <silent> q :q<CR>
+endfunction
+
+" Syntax definition for vim-ref buffer
 function! s:syntax() abort
   syn clear
   syn match  exDocFunction '\v^\*\s+.+'
