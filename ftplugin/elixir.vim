@@ -6,8 +6,19 @@ let g:loaded_vivi = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
-let s:test_errorformat = '%E\ %#%n)\ %.%#,%C\ %#%f:%l,%Z%.%#stacktrace:,%C%m,%.%#(%.%#Error)\ %f:%l:\ %m,%-G%.%#'
-let s:lint_errorformat = '%.%#(%.%#Error)\ %f:%l:\ %m,%-G%.%#'
+let s:test_errorformat = join([
+    \ '%E\ %#%n)\ %.%#',
+    \ '%C\ %#%f:%l',
+    \ '%Z%.%#stacktrace:',
+    \ '%C%m',
+    \ '%.%#(%.%#Error)\ %f:%l:\ %m',
+    \ '%-G%.%#'
+    \ ], ',')
+
+let s:lint_errorformat = join([
+    \ '%.%#(%.%#Error)\ %f:%l:\ %m',
+    \ '%-G%.%#'
+    \ ], ',')
 
 """" Customizing {{{
 
@@ -132,13 +143,9 @@ nnoremap <silent> <Plug>(vivi_mix_test_again) :<C-u>MixTestAgain<CR>
 
 """" }}}
 
-""
-" Enables default key mappings. (default: DISABLED)
-"
-if exists('g:vivi_enable_default_key_mappings')
-    \ && g:vivi_enable_default_key_mappings
+function! s:default_key_mappings() abort
   " pipeline
-  imap >> \|><Space>
+  imap <buffer> >> \|><Space>
 
   if !hasmapto('<Plug>(vivi_mix_run)')
     silent! nmap <buffer> <Leader>r <Plug>(vivi_mix_run)
@@ -151,6 +158,18 @@ if exists('g:vivi_enable_default_key_mappings')
   if !hasmapto('<Plug>(vivi_mix_test_for_current_line)')
     silent! vmap <buffer> <Leader>t <Plug>(vivi_mix_test_for_current_line)
   endif
+endfunction
+
+""
+" Enables default key mappings. (default: DISABLED)
+"
+if exists('g:vivi_enable_default_key_mappings')
+    \ && g:vivi_enable_default_key_mappings
+  silent! call s:default_key_mappings()
+  aug ViviDefaultKeyMappings
+    au!
+    au FileType elixir call s:default_key_mappings()
+  aug END
 endif
 
 ""
