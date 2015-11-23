@@ -123,6 +123,17 @@ function! s:default_key_mappings() abort
 endfunction
 """" }}}
 
+"""" Omni Completion {{{
+function! s:set_omnifunc() abort
+  setlocal omnifunc=vivi#complete#omni
+
+  if !exists('g:neocomplete#sources#omni#input_patterns')
+    let g:neocomplete#sources#omni#input_patterns = {}
+  endif
+  let g:neocomplete#sources#omni#input_patterns.elixir = '[^.[:digit:] *\t]\.'
+endfunction
+"""" }}}
+
 """" Customizing {{{
 
 ""
@@ -169,6 +180,19 @@ if exists('g:vivi_enable_auto_warm_up_iex')
   silent! call vivi#iex#warmup()
 endif
 
+""
+" Enable omni completion. (default: DISABLED)
+" Omnifunc is `vivi#complete#omni`.
+"
+if exists('g:vivi_enable_omni_completion')
+    \ && g:vivi_enable_omni_completion
+  silent! call s:set_omnifunc()
+  aug ViviOmniCompletion
+    au!
+    au FileType elixir call s:set_omnifunc()
+  aug END
+endif
+
 " quickrun config {{{
 let s:mix_run_default_config = {
     \ 'command':           'mix',
@@ -183,6 +207,10 @@ let s:mix_test_default_config = {
     \ 'errorformat':       s:test_errorformat,
     \ 'hook/cd/directory': vivi#get_mix_root(expand('%:p:h')),
     \ }
+
+if !exists('g:quickrun_config')
+  let g:quickrun_config = {}
+endif
 
 let g:quickrun_config['mix_run'] =
     \ extend(s:mix_run_default_config, g:vivi_mix_run_config)
@@ -203,6 +231,13 @@ let g:quickrun_config['elixir/watchdogs_checker'] = {
 call watchdogs#setup(g:quickrun_config)
 " }}}
 
+"""" }}}
+
+"""" Auto Commands {{{
+aug ViviKillIExWhenLeave
+  au!
+  au VimLeave * call vivi#iex#killall()
+aug END
 """" }}}
 
 let &cpo = s:save_cpo

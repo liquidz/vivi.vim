@@ -2,11 +2,13 @@
 " *vivi.vim* supports to setup Elixir development environment.
 "
 " Requirement:
-"  - Vim 7.0 or later
+"  - Vim 7.3.885 or later with Lua enabled
 "  - vim-elixir
 "    https://github.com/elixir-lang/vim-elixir
 "  - vimproc.vim
 "    https://github.com/Shougo/vimproc.vim
+"  - neocomplete.vim
+"    https://github.com/Shougo/neocomplete.vim
 "  - vim-quickrun
 "    https://github.com/thinca/vim-quickrun
 "  - vim-ref

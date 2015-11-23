@@ -24,11 +24,13 @@ Introduction                                           *vivi.vim-introduction*
 *vivi.vim* supports to setup Elixir development environment.
 
 Requirement:
- - Vim 7.0 or later
+ - Vim 7.3.885 or later with Lua enabled
  - vim-elixir
    https://github.com/elixir-lang/vim-elixir
  - vimproc.vim
    https://github.com/Shougo/vimproc.vim
+ - neocomplete.vim
+   https://github.com/Shougo/neocomplete.vim
  - vim-quickrun
    https://github.com/thinca/vim-quickrun
  - vim-ref
@@ -70,6 +72,10 @@ Commands                                                   *vivi.vim-commands*
                                                            *:ViviMixTestAgain*
 :ViviMixTestAgain
 	Run `mix test` as same as last testing condition.
+
+                                                             *:ViviKillAllIEx*
+:ViviKillAllIEx
+	Kill all IEx processes
 
 
 ------------------------------------------------------------------------------
@@ -138,6 +144,10 @@ Key Mappings                                           *vivi.vim-key-mappings*
 <Plug>(vivi_mix_test_again)
 	Call `:ViviMixTestAgain` command.
 
+                                                   *<Plug>(vivi_kill_all_iex)*
+<Plug>(vivi_kill_all_iex)
+	Call `:ViviKillAllIEx` command.
+
 
 
 ==============================================================================
@@ -162,6 +172,11 @@ g:vivi_enable_auto_syntax_checking
                                               *g:vivi_enable_auto_warm_up_iex*
 g:vivi_enable_auto_warm_up_iex
 	Enables auto warm up IEx concurrent process. (default: DISABLED)
+
+                                               *g:vivi_enable_omni_completion*
+g:vivi_enable_omni_completion
+	Enable omni completion. (default: DISABLED)
+	Omnifunc is `vivi#complete#omni`.
 
                                                              *g:vivi#mix_name*
 g:vivi#mix_name
