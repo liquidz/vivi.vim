@@ -159,6 +159,10 @@ g:vivi_enable_default_key_mappings
 g:vivi_enable_auto_syntax_checking
 	Enables auto syntax checking. (default: DISABLED)
 
+                                              *g:vivi_enable_auto_warm_up_iex*
+g:vivi_enable_auto_warm_up_iex
+	Enables auto warm up IEx concurrent process. (default: DISABLED)
+
                                                              *g:vivi#mix_name*
 g:vivi#mix_name
 	File name to detect mix project root.
