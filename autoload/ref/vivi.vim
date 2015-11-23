@@ -29,6 +29,24 @@ function! s:source.get_keyword() abort
   return keyword
 endfunction
 
+function! s:source.opened(query) abort
+  call s:syntax()
+endfunction
+
+function! s:syntax() abort
+  syn clear
+  syn match  exDocFunction '\v^\*\s+.+'
+  syn match  exDocHeader   '\v^##\s+.+'
+  syn region exKeyword     start="`" end="`"
+  syn match  exDocContent  '\v^\s{4}.+'
+  hi def link exDocFunction Function
+  hi def link exDocHeader   Delimiter
+  hi def link exKeyword     Keyword
+  hi def link exDocContent  Define
+
+  let b:current_syntax = 'ref-vivi'
+endfunction
+
 function! ref#vivi#define() abort
   return copy(s:source)
 endfunction
