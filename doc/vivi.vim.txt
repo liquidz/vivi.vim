@@ -47,28 +47,28 @@ Interface                                                 *vivi.vim-interface*
 ------------------------------------------------------------------------------
 Commands                                                   *vivi.vim-commands*
 
-                                                                     *:MixRun*
-:MixRun
+                                                                 *:ViviMixRun*
+:ViviMixRun
 	Run `mix run`.
 
-                                                                 *:MixDepsGet*
-:MixDepsGet
+                                                             *:ViviMixDepsGet*
+:ViviMixDepsGet
 	Run `mix deps.get`.
 
-                                                           *:MixDepsUpdateAll*
-:MixDepsUpdateAll
+                                                       *:ViviMixDepsUpdateAll*
+:ViviMixDepsUpdateAll
 	Run `mix deps.update --all`.
 
-                                                                    *:MixTest*
-:MixTest
+                                                                *:ViviMixTest*
+:ViviMixTest
 	Run `mix test`.
 
-                                                      *:MixTestForCurrentLine*
-:MixTestForCurrentLine
+                                                  *:ViviMixTestForCurrentLine*
+:ViviMixTestForCurrentLine
 	Run `mix test` for current line.
 
-                                                               *:MixTestAgain*
-:MixTestAgain
+                                                           *:ViviMixTestAgain*
+:ViviMixTestAgain
 	Run `mix test` as same as last testing condition.
 
 
@@ -116,27 +116,27 @@ Key Mappings                                           *vivi.vim-key-mappings*
 
                                                         *<Plug>(vivi_mix_run)*
 <Plug>(vivi_mix_run)
-	Call `:MixRun` command.
+	Call `:ViviMixRun` command.
 
                                                    *<Plug>(vivi_mix_deps_get)*
 <Plug>(vivi_mix_deps_get)
-	Call `:MixDepsGet` command.
+	Call `:ViviMixDepsGet` command.
 
                                             *<Plug>(vivi_mix_deps_update_all)*
 <Plug>(vivi_mix_deps_update_all)
-	Call `:MixDepsUpdateAll` command.
+	Call `:ViviMixDepsUpdateAll` command.
 
                                                        *<Plug>(vivi_mix_test)*
 <Plug>(vivi_mix_test)
-	Call `:MixTest` command.
+	Call `:ViviMixTest` command.
 
                                       *<Plug>(vivi_mix_test_for_current_line)*
 <Plug>(vivi_mix_test_for_current_line)
-	Call `:MixTestForCurrentLine` command.
+	Call `:ViviMixTestForCurrentLine` command.
 
                                                  *<Plug>(vivi_mix_test_again)*
 <Plug>(vivi_mix_test_again)
-	Call `:MixTestAgain` command.
+	Call `:ViviMixTestAgain` command.
 
 
 

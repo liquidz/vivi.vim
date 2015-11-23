@@ -27,69 +27,69 @@ let s:lint_errorformat = join([
 ""
 " Run `mix run`.
 "
-command! MixRun call vivi#quickrun#mix_run()
+command! ViviMixRun call vivi#quickrun#mix_run()
 
 ""
 " Run `mix deps.get`.
 "
-command! MixDepsGet call quickrun#run({
+command! ViviMixDepsGet call quickrun#run({
     \ 'type': 'mix_run', 'exec': '%c deps.get'})
 
 ""
 " Run `mix deps.update --all`.
 "
-command! MixDepsUpdateAll call quickrun#run({
+command! ViviMixDepsUpdateAll call quickrun#run({
     \ 'type': 'mix_run', 'exec': '%c deps.update --all'})
 
 ""
 " Run `mix test`.
 "
-command! MixTest call vivi#quickrun#mix_test()
+command! ViviMixTest call vivi#quickrun#mix_test()
 
 ""
 " Run `mix test` for current line.
 "
-command! MixTestForCurrentLine call vivi#quickrun#mix_test_for_current_line()
+command! ViviMixTestForCurrentLine call vivi#quickrun#mix_test_for_current_line()
 
 ""
 " Run `mix test` as same as last testing condition.
 "
-command! MixTestAgain call vivi#quickrun#mix_test_for_last_tested_line()
+command! ViviMixTestAgain call vivi#quickrun#mix_test_for_last_tested_line()
 
 """" }}}
 
 """" Key Mappings {{{
 
 ""
-" Call `:MixRun` command.
+" Call `:ViviMixRun` command.
 "
-nnoremap <silent> <Plug>(vivi_mix_run) :<C-u>MixRun<CR>
+nnoremap <silent> <Plug>(vivi_mix_run) :<C-u>ViviMixRun<CR>
 
 ""
-" Call `:MixDepsGet` command.
+" Call `:ViviMixDepsGet` command.
 "
-nnoremap <silent> <Plug>(vivi_mix_deps_get) :<C-u>MixDepsGet<CR>
+nnoremap <silent> <Plug>(vivi_mix_deps_get) :<C-u>ViviMixDepsGet<CR>
 
 ""
-" Call `:MixDepsUpdateAll` command.
+" Call `:ViviMixDepsUpdateAll` command.
 "
-nnoremap <silent> <Plug>(vivi_mix_deps_update_all) :<C-u>MixDepsUpdateAll<CR>
+nnoremap <silent> <Plug>(vivi_mix_deps_update_all) :<C-u>ViviMixDepsUpdateAll<CR>
 
 ""
-" Call `:MixTest` command.
+" Call `:ViviMixTest` command.
 "
-nnoremap <silent> <Plug>(vivi_mix_test) :<C-u>MixTest<CR>
+nnoremap <silent> <Plug>(vivi_mix_test) :<C-u>ViviMixTest<CR>
 
 ""
-" Call `:MixTestForCurrentLine` command.
+" Call `:ViviMixTestForCurrentLine` command.
 "
 vnoremap <silent> <Plug>(vivi_mix_test_for_current_line)
-    \ :<C-u>MixTestForCurrentLine<CR>
+    \ :<C-u>ViviMixTestForCurrentLine<CR>
 
 ""
-" Call `:MixTestAgain` command.
+" Call `:ViviMixTestAgain` command.
 "
-nnoremap <silent> <Plug>(vivi_mix_test_again) :<C-u>MixTestAgain<CR>
+nnoremap <silent> <Plug>(vivi_mix_test_again) :<C-u>ViviMixTestAgain<CR>
 
 
 function! s:default_key_mappings() abort
