@@ -6,6 +6,11 @@ let g:loaded_vivi = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
+let s:test_errorformat = '%E\ %#%n)\ %.%#,%C\ %#%f:%l,%Z%.%#stacktrace:,%C%m,%.%#(%.%#Error)\ %f:%l:\ %m,%-G%.%#'
+let s:lint_errorformat = '%.%#(%.%#Error)\ %f:%l:\ %m,%-G%.%#'
+
+"""" Customizing {{{
+
 ""
 " Change quickrun configration for `mix run`.
 "
@@ -20,6 +25,7 @@ if !exists('g:vivi_mix_test_config')
   let g:vivi_mix_test_config = {}
 endif
 
+" quickrun config {{{
 let s:mix_run_default_config = {
     \ 'command':           'mix',
     \ 'exec':              '%c run %s',
@@ -30,24 +36,32 @@ let s:mix_test_default_config = {
     \ 'command':           'mix',
     \ 'exec':              '%c test --no-color',
     \ 'outputter':         'multi:buffer:quickfix',
-    \ 'errorformat':       '%E\ %#%n)\ %.%#,%C\ %#%f:%l,%Z%.%#stacktrace:,%C%m,%.%#(%.%#Error)\ %f:%l:\ %m,%-G%.%#',
+    \ 'errorformat':       s:test_errorformat,
     \ 'hook/cd/directory': vivi#get_mix_root(expand('%:p:h')),
     \ }
 
-let g:quickrun_config['mix_run'] = extend(s:mix_run_default_config, g:vivi_mix_run_config)
-let g:quickrun_config['mix_test'] = extend(s:mix_test_default_config, g:vivi_mix_test_config)
+let g:quickrun_config['mix_run'] = 
+    \ extend(s:mix_run_default_config, g:vivi_mix_run_config)
+let g:quickrun_config['mix_test'] =
+    \ extend(s:mix_test_default_config, g:vivi_mix_test_config)
+" }}}
 
-" watchdog config
+" watchdog config {{{
 let g:quickrun_config['watchdogs_checker/elixir'] = {
     \ 'command':           'elixir',
     \ 'exec':              '%c %s',
-    \ 'errorformat':       '%.%#(%.%#Error)\ %f:%l:\ %m,%-G%.%#',
+    \ 'errorformat':       s:lint_errorformat,
     \ 'hook/cd/directory': vivi#get_mix_root(expand('%:p:h'))
     \ }
 let g:quickrun_config['elixir/watchdogs_checker'] = {
     \ 'type' : 'watchdogs_checker/elixir'
     \ }
 call watchdogs#setup(g:quickrun_config)
+" }}}
+
+"""" }}}
+
+"""" Commands {{{
 
 ""
 " Run `mix run`.
@@ -81,6 +95,10 @@ command! MixTestForCurrentLine call vivi#quickrun#mix_test_for_current_line()
 "
 command! MixTestAgain call vivi#quickrun#mix_test_for_last_tested_line()
 
+"""" }}}
+
+"""" Key Mappings {{{
+
 ""
 " Call `:MixRun` command.
 "
@@ -111,6 +129,8 @@ vnoremap <silent> <Plug>(vivi_mix_test_for_current_line)
 " Call `:MixTestAgain` command.
 "
 nnoremap <silent> <Plug>(vivi_mix_test_again) :<C-u>MixTestAgain<CR>
+
+"""" }}}
 
 ""
 " Enables default key mappings. (default: DISABLED)
