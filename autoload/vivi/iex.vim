@@ -11,10 +11,16 @@ let s:processes = get(s:, 'processes', [])
 " Launch IEx concurrent process in a:dir,
 " and return process label string.
 function! vivi#iex#of(dir) abort
+  let cmd = 'iex'
   let dir = vivi#get_mix_root(a:dir)
+  if dir ==# ''
+    let dir = a:dir
+  else
+    let cmd = cmd . ' -S mix'
+  endif
+
   let label = s:CP.of(
-      \ 'iex -S mix',
-      \ dir,
+      \ cmd, dir,
       \ [['*read*', '_', 'iex(.*)>\s*']])
 
   let s:processes = s:DL.uniq(s:processes + [label])
