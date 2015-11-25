@@ -29,5 +29,18 @@ function! vivi#module#name() abort
   return name
 endfunction
 
+""
+" Reload module
+"
+function! vivi#module#reload(module_name) abort
+  if a:module_name ==# ''
+    return 0
+  endif
+
+  let label = vivi#iex#of(expand('%:p:h'))
+  let [ok, out] = vivi#iex#queue(label, printf('r %s', a:module_name))
+  return ok
+endfunction
+
 let &cpo = s:save_cpo
 unlet s:save_cpo
