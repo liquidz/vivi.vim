@@ -1,9 +1,10 @@
 let s:save_cpo = &cpo
 set cpo&vim
 
-let s:V  = vital#of('vivi')
-let s:DL = s:V.import('Data.List')
-let s:CP = s:V.import('ConcurrentProcess')
+let s:V   = vital#of('vivi')
+let s:Str = s:V.import('Data.String')
+let s:DL  = s:V.import('Data.List')
+let s:CP  = s:V.import('ConcurrentProcess')
 
 " List of concurrent processes
 let s:processes = get(s:, 'processes', [])
@@ -57,6 +58,31 @@ endfunction
 "
 function! vivi#iex#warmup() abort
   let label = vivi#iex#of(expand('%:p:h'))
+endfunction
+
+function! vivi#iex#_extract_module_name(line) abort
+  let arr = split(s:Str.trim(a:line), '\v\s+')
+  if len(arr) < 3
+    return ''
+  endif
+  return arr[1]
+endfunction
+
+""
+" Return current file's module name
+"
+function! vivi#iex#module_name() abort
+  let pos = getpos('.')
+  call setpos('.', [0, 0, 0, 0])
+  let [lnum, col] = searchpos('defmodule ', 'c')
+  if lnum ==# 0 && col ==# 0
+    return ''
+  endif
+
+  let name = vivi#iex#_extract_module_name(getline(lnum))
+
+  call setpos('.', pos)
+  return name
 endfunction
 
 let &cpo = s:save_cpo
