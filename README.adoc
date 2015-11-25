@@ -4,10 +4,17 @@ image:https://circleci.com/gh/liquidz/vivi.vim.svg?style=svg["Circle CI", link="
 
 Support to setup a Elixir development environment in Vim.
 
+== Features
+
+* Syntax check
+* Mix integration
+* Viewing references
+* Omni completion
 
 == Requirements
 
 Vim 7.3.885 or later with link:http://vimdoc.sourceforge.net/htmldoc/if_lua.html[Lua] enabled
+
 
 == Installation
 
@@ -107,7 +114,9 @@ let g:vivi_enable_omni_completion = 1
 
 == Omni Completion
 
-Manual omnifunc setting example is here, if you don't want to use `<<enable_omnicomp,g:vivi_enable_omni_completion>>`.
+Currently, vivi completes only module functions.
+
+Manual setting example is here, if you don't want to use `<<enable_omnicomp,g:vivi_enable_omni_completion>>`.
 
 [source,vim]
 ----
