@@ -57,6 +57,11 @@ command! ViviMixTestForCurrentLine call vivi#quickrun#mix_test_for_current_line(
 command! ViviMixTestAgain call vivi#quickrun#mix_test_for_last_tested_line()
 
 ""
+" Start IEx processes
+"
+command! ViviStartIEx call vivi#iex#start()
+
+""
 " Kill all IEx processes
 "
 command! ViviKillAllIEx call vivi#iex#killall()
@@ -187,7 +192,7 @@ endif
 "
 if exists('g:vivi_enable_auto_warm_up_iex')
     \ && g:vivi_enable_auto_warm_up_iex
-  silent! call vivi#iex#warmup()
+  silent! call vivi#iex#start()
 endif
 
 ""

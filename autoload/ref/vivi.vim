@@ -6,7 +6,7 @@ let s:invalid_chars = '\v[()''" \t]'
 
 function! s:source.available() abort
   let CP = vital#of('vivi').import('ConcurrentProcess')
-	return CP.is_available()
+  return CP.is_available()
 endfunction
 
 function! s:source.get_body(query) abort
@@ -23,7 +23,7 @@ endfunction
 
 function! s:source.get_keyword() abort
   let isk = &l:iskeyword
-  " allow 'dot' as keyword
+  " allow '.' as keyword
   setlocal iskeyword+=.
   let keyword = expand('<cword>')
   let &l:iskeyword = isk
