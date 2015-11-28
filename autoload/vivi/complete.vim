@@ -2,11 +2,14 @@ let s:V  = vital#of('vivi')
 let s:DL = s:V.import('Data.List')
 let s:CP = s:V.import('ConcurrentProcess')
 
-let s:fns_format = '
-    \ :functions
-    \ |> %s.__info__
-    \ |> Enum.each(fn {a, b} -> IO.puts "%s.#{a} #{b}" end)
-    \ '
+function! s:split_at_first_space(s) abort
+  let i = stridx(a:s, ' ')
+  if i !=# -1
+    return [a:s[:i-1], a:s[i+1:]]
+  else
+    return [a:s, '']
+  endif
+endfunction
 
 function! vivi#complete#findstart(line, col) abort
     let start = a:col
@@ -30,7 +33,7 @@ endfunction
 
 function! s:module_functions(label, keyword) abort
   let mod       = vivi#complete#module_name(a:keyword)
-  let query     = printf(s:fns_format, mod, mod)
+  let query     = printf('Vivi.print_module_functions("%s")', mod)
   let [ok, out] = vivi#iex#queue(a:label, query)
 
   if !ok
@@ -41,15 +44,15 @@ function! s:module_functions(label, keyword) abort
 endfunction
 
 function! vivi#complete#candidate(fn) abort
-  let arr = split(a:fn)
-  if len(arr) !=# 2
+  let [name, param] = s:split_at_first_space(a:fn)
+  if param ==# ''
     return {}
   endif
 
   return {
-      \ 'word': arr[0],
-      \ 'kind': 'f',
-      \ 'menu': '/' . arr[1],
+      \ 'word':  name,
+      \ 'abbr':  a:fn,
+      \ 'kind':  'f',
       \ 'icase': 1
       \}
 endfunction

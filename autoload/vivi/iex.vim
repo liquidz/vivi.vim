@@ -3,7 +3,19 @@ set cpo&vim
 
 let s:V  = vital#of('vivi')
 let s:DL = s:V.import('Data.List')
+let s:FP = s:V.import('System.Filepath')
 let s:CP = s:V.import('ConcurrentProcess')
+
+let s:SCRIPT_DIR = expand('<sfile>:p:h:gs?\\?/?g')
+let s:EX_LIBRARY = s:FP.join(s:SCRIPT_DIR, '..', '..', 'elixir', 'lib', 'vivi.ex')
+
+" c.f. https://groups.google.com/forum/#!msg/elixir-lang-talk/uU8K2NJAE70/vs-b2GL1VscJ
+let s:RELOAD_QUERY = join([
+    \ 'Mix.Task.reenable "compile.elixir"',
+    \ 'Application.stop(Mix.Project.config[:app])',
+    \ 'Mix.Task.run "compile.elixir"',
+    \ 'Application.start(Mix.Project.config[:app], :permanent)'
+    \ ], ';')
 
 " List of concurrent processes
 let s:processes = get(s:, 'processes', [])
@@ -11,7 +23,7 @@ let s:processes = get(s:, 'processes', [])
 " Launch IEx concurrent process in a:dir,
 " and return process label string.
 function! vivi#iex#of(dir) abort
-  let cmd = 'iex'
+  let cmd = 'iex -r ' . s:EX_LIBRARY
   let dir = vivi#get_mix_root(a:dir)
   if dir ==# ''
     let dir = a:dir
@@ -64,6 +76,15 @@ endfunction
 "
 function! vivi#iex#start() abort
   let label = vivi#iex#of(expand('%:p:h'))
+endfunction
+
+""
+" Reload an entire project
+"
+function! vivi#iex#reload() abort
+  let label = vivi#iex#of(expand('%:p:h'))
+  let [ok, out] = vivi#iex#queue(label, s:RELOAD_QUERY)
+  return ok
 endfunction
 
 ""
