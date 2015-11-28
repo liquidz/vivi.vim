@@ -39,7 +39,7 @@ function! s:suite.candidate_test() abort
   let expected = {
       \ 'word': 'Foo.bar',
       \ 'kind': 'f',
-      \ 'menu': '/2',
+      \ 'abbr': 'Foo.bar 2',
       \ 'icase': 1
       \ }
 
