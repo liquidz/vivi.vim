@@ -182,9 +182,12 @@ endif
 "
 if exists('g:vivi_enable_auto_syntax_checking')
     \ && g:vivi_enable_auto_syntax_checking
-  let g:watchdogs_check_BufWritePost_enables = {
-      \ 'elixir': 1
-      \ }
+
+  if exists('g:loaded_watchdogs')
+    let g:watchdogs_check_BufWritePost_enables = {
+        \ 'elixir': 1
+        \ }
+  endif
 endif
 
 ""
@@ -234,16 +237,18 @@ let g:quickrun_config['mix_test'] =
 " }}}
 
 " watchdog config {{{
-let g:quickrun_config['watchdogs_checker/elixir'] = {
-    \ 'command':           'elixir',
-    \ 'exec':              '%c %s',
-    \ 'errorformat':       s:lint_errorformat,
-    \ 'hook/cd/directory': vivi#get_mix_root(expand('%:p:h'))
-    \ }
-let g:quickrun_config['elixir/watchdogs_checker'] = {
-    \ 'type' : 'watchdogs_checker/elixir'
-    \ }
-call watchdogs#setup(g:quickrun_config)
+if exists('g:loaded_watchdogs')
+  let g:quickrun_config['watchdogs_checker/elixir'] = {
+      \ 'command':           'elixir',
+      \ 'exec':              '%c %s',
+      \ 'errorformat':       s:lint_errorformat,
+      \ 'hook/cd/directory': vivi#get_mix_root(expand('%:p:h'))
+      \ }
+  let g:quickrun_config['elixir/watchdogs_checker'] = {
+      \ 'type' : 'watchdogs_checker/elixir'
+      \ }
+  call watchdogs#setup(g:quickrun_config)
+endif
 " }}}
 
 """" }}}

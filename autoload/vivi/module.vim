@@ -37,8 +37,10 @@ function! vivi#module#reload(module_name) abort
     return 0
   endif
 
+  echomsg printf('reloading: [%s]', a:module_name)
+
   let label = vivi#iex#of(expand('%:p:h'))
-  let [ok, out] = vivi#iex#queue(label, printf('r %s', a:module_name))
+  let [ok, out] = vivi#iex#queue(label, printf('r(%s)', a:module_name))
   return ok
 endfunction
 
