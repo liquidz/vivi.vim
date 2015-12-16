@@ -1,0 +1,140 @@
+= vivi.vim
+
+image:https://circleci.com/gh/liquidz/vivi.vim.svg?style=svg["Circle CI", link="https://circleci.com/gh/liquidz/vivi.vim"]
+
+Do vim need a reason to help elixir developers?
+
+
+== Features
+
+* Checking syntax
+* Mix integration
+* Viewing references
+* Omni completion
+
+== Requirements
+
+Vim 7.3.885 or later with link:http://vimdoc.sourceforge.net/htmldoc/if_lua.html[Lua] enabled
+
+
+== Installation
+
+.neobundle
+[source,vim,subs="verbatim,macros"]
+----
+NeoBundle 'liquidz/vivi.vim', {
+    \ 'depends': [
+    \   'link:https://github.com/elixir-lang/vim-elixir[elixir-lang/vim-elixir]',
+    \   'link:https://github.com/Shougo/vimproc.vim[Shougo/vimproc.vim]',
+    \   'link:https://github.com/Shougo/neocomplete.vim[Shougo/neocomplete.vim]',
+    \   'link:https://github.com/thinca/vim-quickrun[thinca/vim-quickrun]',
+    \   'link:https://github.com/thinca/vim-ref[thinca/vim-ref]',
+    \   'link:https://github.com/osyo-manga/shabadou.vim[osyo-manga/shabadou.vim]',
+    \   'link:https://github.com/osyo-manga/vim-watchdogs[osyo-manga/vim-watchdogs]'
+    \ ]}
+----
+
+To use link:https://github.com/scrooloose/syntastic[Syntastic] instead of `vim-watchdogs`,
+add `scrooloose/syntastic` and remove `shabadou.vim` and `vim-watchdogs`.
+
+== Interface
+
+=== Commands
+
+[options="header,autowidth"]
+|===
+| command                    | notes
+| ViviMixRun                a| Run `mix run $CURRENT_FILE` in mix project, or run `elixir $CURRENT_FILE`.
+| ViviMixDepsGet            a| Run `mix deps.get`.
+| ViviMixDepsUpdateAll      a| Run `mix deps.update --all`.
+| ViviMixTest               a| Run `mix test`.
+| ViviMixTestForCurrentLine a| Run `mix test` for current line number.
+| ViviMixTestAgain          a| Run `mix test` as same as last testing condition.
+| ViviKillAllIEx             | Kill all IEx processes.
+|===
+
+=== Key Mappings
+
+[options="header,autowidth"]
+|===
+| mode   | mapping                                 | notes
+| normal | <Plug>(vivi_mix_run)                   a| call `ViviMixRun` command.
+| normal | <Plug>(vivi_mix_deps_get)              a| call `ViviMixDepsGet` command.
+| normal | <Plug>(vivi_mix_deps_update_all)       a| call `ViviMixDepsUpdateAll` command.
+| normal | <Plug>(vivi_mix_test)                  a| call `ViviMixTest` command.
+| visual | <Plug>(vivi_mix_test_for_current_line) a| call `ViviMixTestForCurrentLine` command.
+| normal | <Plug>(vivi_mix_test_again)            a| call `ViviMixTestAgain` command.
+| normal | <Plug>(vivi_kill_all_iex)              a| call `ViviKillAllIEx` command.
+|===
+
+== Configuration
+
+.Enables auto syntax checking. (default: **DISABLED**)
+This option supports only vim-watchdogs.
+[source,vim]
+----
+let g:vivi_enable_auto_syntax_checking = 1
+----
+
+.Enables default key mappings. (default: **DISABLED**)
+Default key mappings is <<default_keymap,here>>.
+[source,vim]
+----
+let g:vivi_enable_default_key_mappings = 1
+----
+
+.Change quickrun configration for `mix run` and `mix test`.
+[source,vim]
+----
+let g:vivi_mix_run_config = { ... }
+let g:vivi_mix_test_config = { ... }
+----
+
+.Enables auto warm up IEx concurrent process. (default: **DISABLED**)
+Warming up IEx helps you get quick response in viewing reference or omni completion.
+[source,vim]
+----
+let g:vivi_enable_auto_warm_up_iex = 1
+----
+
+.Enable omni completion. (default: **DISABLED**)
+[source,vim]
+----
+let g:vivi_enable_omni_completion = 1
+----
+
+[[default_keymap]]
+=== Default Key Mappings
+
+[options="header,autowidth"]
+|===
+| mode   | lhs        | rhs                                    | notes
+| insert | >>         | \|>                                    | Pipeline.
+| normal | <Leader>r  | <Plug>(vivi_mix_run)                   |
+| normal | <Leader>t  | <Plug>(vivi_mix_test_again)            |
+| visual | <Leader>t  | <Plug>(vivi_mix_test_for_current_line) |
+| normal | <Leader>vk | <Plug>(vivi_kill_all_iex)              |
+|===
+
+[[omni_completion]]
+== Omni Completion
+
+Currently, vivi completes only module functions.
+
+Manual setting example is here, if you don't want to use `<<enable_omnicomp,g:vivi_enable_omni_completion>>`.
+
+[source,vim]
+----
+setlocal omnifunc=vivi#complete#omni
+
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+let g:neocomplete#sources#omni#input_patterns.elixir = '[^.[:digit:] *\t]\.'
+----
+
+== License
+
+Copyright (C) 2015 link:http://twitter.com/uochan[Masashi Iizuka]
+
+Distributed under the MIT License.

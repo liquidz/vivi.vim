@@ -7,7 +7,7 @@ let s:FP = s:V.import('System.Filepath')
 function! s:suite.get_mix_root_test() abort
   let root_dir        = getcwd()
   let test_dir        = s:FP.join(root_dir, 'test')
-  let g:vivi#mix_name = 'README.md'
+  let g:vivi#mix_name = 'README.adoc'
 
   call s:assert.equals(
       \ vivi#get_mix_root(test_dir),

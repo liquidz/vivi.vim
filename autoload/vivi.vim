@@ -2,11 +2,17 @@
 " *vivi.vim* supports to setup Elixir development environment.
 "
 " Requirement:
-"  - Vim 7.0 or later
+"  - Vim 7.3.885 or later with Lua enabled
 "  - vim-elixir
 "    https://github.com/elixir-lang/vim-elixir
+"  - vimproc.vim
+"    https://github.com/Shougo/vimproc.vim
+"  - neocomplete.vim
+"    https://github.com/Shougo/neocomplete.vim
 "  - vim-quickrun
 "    https://github.com/thinca/vim-quickrun
+"  - vim-ref
+"    https://github.com/thinca/vim-ref
 "  - shabadou.vim
 "    https://github.com/osyo-manga/shabadou.vim
 "  - vim-watchdogs
@@ -19,7 +25,7 @@
 let s:save_cpo = &cpo
 set cpo&vim
 
-let s:V = vital#of('vivi')
+let s:V  = vital#of('vivi')
 let s:FP = s:V.import('System.Filepath')
 
 ""

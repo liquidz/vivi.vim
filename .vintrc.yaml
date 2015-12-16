@@ -1,0 +1,7 @@
+cmdargs:
+  color: true
+policies:
+  ProhibitSetNoCompatible:
+    enabled: false
+  ProhibitImplicitScopeVariable:
+    enabled: false
