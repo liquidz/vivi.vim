@@ -15,9 +15,12 @@ defmodule Vivi do
   end
 
   def module_functions(module_name) do
-    :"Elixir.#{module_name}"
-    |> Code.get_docs(:docs)
-    |> Enum.map(fn doc -> module_name <> "." <> doc_to_string(doc) end)
+    docs = :"Elixir.#{module_name}"
+            |> Code.get_docs(:docs)
+    case docs do
+      nil -> [module_name]
+      _ -> Enum.map(docs, fn doc -> module_name <> "." <> doc_to_string(doc) end)
+    end
   end
 
   def print_module_functions(module_name) do
@@ -26,3 +29,4 @@ defmodule Vivi do
     |> Enum.each(&IO.puts/1)
   end
 end
+
