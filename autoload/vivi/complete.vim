@@ -24,11 +24,7 @@ function! vivi#complete#module_name(keyword) abort
   if a:keyword ==# ''
     return ''
   endif
-  let i = strridx(a:keyword, '.')
-  if i ==# -1
-    return a:keyword
-  endif
-  return a:keyword[0:i-1]
+  return a:keyword
 endfunction
 
 function! s:module_functions(label, keyword) abort

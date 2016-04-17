@@ -15,9 +15,24 @@ defmodule Vivi do
   end
 
   def module_functions(module_name) do
-    :"Elixir.#{module_name}"
-    |> Code.get_docs(:docs)
-    |> Enum.map(fn doc -> module_name <> "." <> doc_to_string(doc) end)
+    [m_name|m_ending] = String.split(module_name, ".", parts: 2)
+    m_ending = case m_ending do
+      [val] -> val
+      [] -> ""
+    end
+    docs = :"Elixir.#{m_name}"
+            |> Code.get_docs(:docs)
+    results = case docs do
+      nil -> [module_name]
+      _ -> Stream.map(docs, fn doc -> doc_to_string(doc) end)
+      |> Stream.filter(fn doc -> if m_ending != "" do
+                                   String.starts_with?(String.downcase(doc), String.downcase(m_ending))
+                                 else doc
+                                 end
+                       end)
+      |> Enum.map(fn doc -> m_name <> "." <> doc end)
+    end
+    results
   end
 
   def print_module_functions(module_name) do
@@ -26,3 +41,4 @@ defmodule Vivi do
     |> Enum.each(&IO.puts/1)
   end
 end
+
